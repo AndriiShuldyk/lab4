@@ -1,56 +1,44 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-    class Printer
+class Printer
+{
+    public virtual void Print(string argument)
     {
-        public virtual void Print(string value)
-        {
-            Console.WriteLine(value);
-        }
+        Console.WriteLine(argument);
+        Console.ForegroundColor = ConsoleColor.Black;
     }
+}
 
-    class Company : Printer
+class FirstLine : Printer
+{
+    public override void Print(string argument)
     {
-        public override void Print(string value)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            base.Print(value);
-        }
+        Console.ForegroundColor = ConsoleColor.Blue;
+        base.Print(argument);
     }
+}
 
-    class Position : Printer
+class SecondLine : Printer
+{
+    public override void Print(string argument)
     {
-        public override void Print(string value)
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            base.Print(value);
-        }
+        Console.ForegroundColor = ConsoleColor.Red;
+        base.Print(argument);
     }
+}
 
-    class NamePerson : Printer
+class Program
+{
+    static void Main(string[] args)
     {
-        public override void Print(string value)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            base.Print(value);
-        }
-
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Printer name = new NamePerson();
-            name.Print("Elon");
-            Printer company = new Company();
-            company.Print("Tesla, SpaceX");
-            Printer position = new Position();
-            position.Print("Head");
-        }
+        Printer firstLine = new FirstLine();
+        firstLine.Print("first line");
+        Printer secondLine = new SecondLine();
+        secondLine.Print("second line");
     }
 }
